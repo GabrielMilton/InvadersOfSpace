@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-public class InvadersOfSpace {
+
     //Basic Game Application
 //Version 2
 // Basic Object, Image, Movement
@@ -28,7 +28,6 @@ public class InvadersOfSpace {
 //import java.awt.Canvas;
 
 //Graphics Libraries
-
 
 
     //*******************************************************************************
@@ -63,7 +62,6 @@ public class InvadersOfSpace {
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
         private Ealien CsBros;
-
 
 
         // Main method definition
@@ -141,79 +139,10 @@ public class InvadersOfSpace {
             CsBros.move();
 
 
-
-            for (int m = 0; m < roids.length; m = m + 1) {
-                roids[m].move();
-
-            }
-
-
         }
 
-       /*/ public void crashing() {
+        public void crashing() {
             // check to see if my astros crash into eachother
-            if (astro.hitBox.intersects(Niamlikespickles.hitBox)) {
-                System.out.println("CRASH!!!");
-                astro.dx = -astro.dx;
-                Niamlikespickles.dx = -Niamlikespickles.dx;
-                astro.dy = -astro.dy;
-                Niamlikespickles.dy = -Niamlikespickles.dy;
-
-
-            }
-            if (Niamthemenece.hitBox.intersects(astro.hitBox) && Niamthemenece.iscrasinhg == false) {
-                System.out.println("BOOM!!!");
-                Niamthemenece.height += astro.height;
-                Niamthemenece.width += astro.width;
-                Niamthemenece.iscrasinhg = true;
-                astro.isAlive = false;
-
-
-
-
-
-           Niamthemenece.dx = -Niamthemenece.dx;
-            Niamthemenece.dx = -Tobyterror.dx;
-            Niamthemenece.dy = -Niamthemenece.dy;
-            Niamthemenece.dy = -Tobyterror.dy;
-
-
-
-            }
-// ! = saying we want the oppiste thing to happen
-            if (!Niamthemenece.hitBox.intersects(astro.hitBox)) {
-                astro.iscrasinhg = false;
-
-            }
-
-            if (!Tobyterror.hitBox.intersects(Niamlikespickles.hitBox)) {
-                Niamlikespickles.iscrasinhg = false;
-
-            }
-            if (Tobyterror.hitBox.intersects(Niamlikespickles.hitBox) && Niamlikespickles.iscrasinhg == false) {
-                System.out.println("BOOM!!!");
-                Tobyterror.height += 50;
-                Niamlikespickles.iscrasinhg = true;
-                Niamlikespickles.isAlive = false;
-
-
-
-
-
-          Niamthemenece.dx = -Niamthemenece.dx;
-            Niamthemenece.dx = -Tobyterror.dx;
-            Niamthemenece.dy = -Niamthemenece.dy;
-            Niamthemenece.dy = -Tobyterror.dy;
-
-
-                for (int c = 0; c < roids.length; c = c + 1) {
-                    if (roids[c].hitBox.intersects(astro.hitBox) && astro.iscrasinhg == false) {
-                        System.out.println("astroid crash");
-                    }
-                }
-
-
-            }
 
 
         }
@@ -276,16 +205,8 @@ public class InvadersOfSpace {
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width, Hship.hitBox.height);
 
             }
-            /*?
-            if (Niamlikespickles.isAlive == true) {
-                g.drawImage(tired, Niamlikespickles.xpos, Niamlikespickles.ypos, Niamlikespickles.width, Niamlikespickles.height, null);
 
-            }
-            for(int r=0; r<roids.length; r=r+1) {
-                g.drawImage(Niastroid,roids[r].xpos,roids[r].ypos,roids[r].height,roids[r].width,null);
-            }
-            g.drawImage(Niastroid, Niamthemenece.xpos, Niamthemenece.ypos, Niamthemenece.width, Niamthemenece.height, null);
-            g.drawImage(Tobyroid, Tobyterror.xpos, Tobyterror.ypos, Tobyterror.width, Tobyterror.height, null);
+
             // use this to draw hitbox
 
 // end of adding things
@@ -305,27 +226,27 @@ public class InvadersOfSpace {
             // up arrow is 38
             if (e.getKeyCode()== 38){
                 System.out.println("pressed up arrow");
-                Niamthemenece.ypos = Niamthemenece.ypos - 5;
-                Niamthemenece.dy = -Math.abs(Niamthemenece.dy);
+                Hship.ypos = Hship.ypos - 5;
+                Hship.dy = -Math.abs(Hship.dy);
             }
 
             if (e.getKeyCode()== 40){
                 System.out.println("pressed down arrow");
-                Niamthemenece.ypos = Niamthemenece.ypos + 5;
-                Niamthemenece.dy = Math.abs(Niamthemenece.dy);
+                Hship.ypos = Hship.ypos + 5;
+                Hship.dy = Math.abs(Hship.dy);
             }
             if (e.getKeyCode()== 39){
                 System.out.println("pressed right arrow");
-                Niamthemenece.xpos = Niamthemenece.xpos + 5;
-                Niamthemenece.dx = Math.abs(Niamthemenece.dx);
+                Hship.xpos = Hship.xpos + 5;
+                Hship.dx = Math.abs(Hship.dx);
 
 
 
             }
             if (e.getKeyCode()== 37){
                 System.out.println("pressed left arrow");
-                Niamthemenece.xpos = Niamthemenece.xpos -5;
-                Niamthemenece.dx = -Math.abs(Niamthemenece.dx);
+                Hship.xpos = Hship.xpos -5;
+                Hship.dx = -Math.abs(Hship.dx);
             }
         }
 
@@ -335,12 +256,12 @@ public class InvadersOfSpace {
 
             if (e.getKeyCode() == 38) {
                 System.out.println("not pressed up arrow");
-                Niamthemenece.dy = 0;
+                Hship.dy = 0;
             }
 
             if (e.getKeyCode() == 40) {
                 System.out.println("not pressed up arrow");
-                Niamthemenece.dy = 0;
+                Hship.dy = 0;
             }
         }
 
@@ -351,13 +272,6 @@ public class InvadersOfSpace {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            astro.xpos = e.getX();
-            astro.ypos = e.getY();
-            System.out.println(e.getClickCount());
-            if(e.getClickCount()==2){
-                astro.width = astro.width*2;
-                astro.height = astro.height*2;
-            }
         }
 
         @Override
@@ -376,7 +290,7 @@ public class InvadersOfSpace {
         }
         //step 3 add keylisitener method
     }
-    /*/
-        }
-    }
-}
+
+
+
+
