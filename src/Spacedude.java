@@ -31,8 +31,8 @@ import java.awt.*;
         public Spacedude(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =10;
-            dy =10;
+            dx = 0;
+            dy = 0;
             width = 60;
             height = 60;
             isAlive = true;
@@ -56,8 +56,6 @@ import java.awt.*;
                 dy = -dy;
 
             }
-
-
 
 
             xpos = xpos + dx;

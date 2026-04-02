@@ -33,7 +33,7 @@ import javax.swing.JPanel;
     //*******************************************************************************
 // Class Definition Section
 // step 1: implent keylisitener
-// step 1" omplent Mouslisinter
+// step 1" implent Mouslisinter
     public class InvadersOfSpace implements Runnable, KeyListener, MouseListener {
 
         //Variable Definition Section
@@ -103,7 +103,8 @@ import javax.swing.JPanel;
             //create (construct) the objects needed for the game and load up
             Spacedude = Toolkit.getDefaultToolkit().getImage("SpaceBus.jpeg"); //load the picture
             Blast = Toolkit.getDefaultToolkit().getImage("GDAWG.png");
-            BackgroundPic = Toolkit.getDefaultToolkit().getImage("TheMichealsun.jpg");
+            Ealien =  Toolkit.getDefaultToolkit().getImage("GDAWG.png");
+            BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
 
             Hship = new Spacedude(randx, randy);
             CsBros = new Ealien(randx, randy);
@@ -226,26 +227,24 @@ import javax.swing.JPanel;
             // up arrow is 38
             if (e.getKeyCode()== 38){
                 System.out.println("pressed up arrow");
-                Hship.ypos = Hship.ypos - 5;
+                Hship.dy = 5;
                 Hship.dy = -Math.abs(Hship.dy);
             }
 
             if (e.getKeyCode()== 40){
                 System.out.println("pressed down arrow");
-                Hship.ypos = Hship.ypos + 5;
+                Hship.dy = 5;
                 Hship.dy = Math.abs(Hship.dy);
             }
             if (e.getKeyCode()== 39){
                 System.out.println("pressed right arrow");
-                Hship.xpos = Hship.xpos + 5;
+                Hship.dx = 5;
                 Hship.dx = Math.abs(Hship.dx);
-
-
 
             }
             if (e.getKeyCode()== 37){
                 System.out.println("pressed left arrow");
-                Hship.xpos = Hship.xpos -5;
+                Hship.dx = 5;
                 Hship.dx = -Math.abs(Hship.dx);
             }
         }
@@ -258,10 +257,17 @@ import javax.swing.JPanel;
                 System.out.println("not pressed up arrow");
                 Hship.dy = 0;
             }
-
             if (e.getKeyCode() == 40) {
                 System.out.println("not pressed up arrow");
                 Hship.dy = 0;
+            }
+            if (e.getKeyCode() == 39) {
+                System.out.println("not pressed up arrow");
+                Hship.dx = 0;
+            }
+            if (e.getKeyCode() == 37) {
+                System.out.println("not pressed up arrow");
+                Hship.dx = 0;
             }
         }
 
