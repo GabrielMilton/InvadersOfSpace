@@ -6,11 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -53,7 +48,7 @@ import javax.swing.JPanel;
         public Image Spacedude;
         public Image Ealien;
         public Image Blast;
-        ;
+        public Ealien[] CSbros;
         public Image BackgroundPic;
 
         //public Niastroid[] roids;
@@ -61,7 +56,6 @@ import javax.swing.JPanel;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
-        private Ealien CsBros;
 
 
         // Main method definition
@@ -103,11 +97,13 @@ import javax.swing.JPanel;
             //create (construct) the objects needed for the game and load up
             Spacedude = Toolkit.getDefaultToolkit().getImage("SpaceBus.jpeg"); //load the picture
             Blast = Toolkit.getDefaultToolkit().getImage("GDAWG.png");
-            Ealien =  Toolkit.getDefaultToolkit().getImage("GDAWG.png");
+            Ealien =  Toolkit.getDefaultToolkit().getImage("Moooon.jpeg");
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
-
+            CSbros = new Ealien[10];
             Hship = new Spacedude(randx, randy);
-            CsBros = new Ealien(randx, randy);
+            for(int n=0; n<CSbros.length; n=n+1) {
+                CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
+            }
 
             //Niamthemenece.dx = -Niamthemenece.dx; - use this to change the dx or dy of two objects that come from the same class
 
@@ -137,14 +133,19 @@ import javax.swing.JPanel;
         public void moveThings() {
             //calls the move( ) code in the objects
             Hship.move();
-            CsBros.move();
-
+            for(int m=0; m<CSbros.length; m=m+1){
+                CSbros[m].move();
+            }
 
         }
 
         public void crashing() {
             // check to see if my astros crash into eachother
-
+            for(int c=0; c<CSbros.length; c=c+1){
+                if (CSbros[c].hitBox.intersects(Hship.hitBox)&& Hship.iscrasinhg== false){
+                    System.out.println("astroid crash");
+                }
+            }
 
         }
 
@@ -206,6 +207,9 @@ import javax.swing.JPanel;
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width, Hship.hitBox.height);
 
             }
+            for(int r=0; r<CSbros.length; r=r+1) {
+                g.drawImage(Ealien,CSbros[r].xpos,CSbros[r].ypos,CSbros[r].height,CSbros[r].width,null);
+            }
 
 
             // use this to draw hitbox
@@ -261,7 +265,7 @@ import javax.swing.JPanel;
                 System.out.println("not pressed up arrow");
                 Hship.dy = 0;
             }
-            if (e.getKeyCode() == 39) {
+            if (e.getKeyCode() == 39);{
                 System.out.println("not pressed up arrow");
                 Hship.dx = 0;
             }

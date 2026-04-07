@@ -29,8 +29,8 @@ import java.awt.*;
         public Ealien(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =10;
-            dy =10;
+            dx =0;
+            dy =1;
             width = 60;
             height = 60;
             isAlive = true;
