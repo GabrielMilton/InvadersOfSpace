@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -47,7 +46,7 @@ import javax.swing.JPanel;
         public BufferStrategy bufferStrategy;
         public Image Spacedude;
         public Image Ealien;
-        public Image Blast;
+        public Image AbdulBlast;
         public Ealien[] CSbros;
         public Image BackgroundPic;
 
@@ -56,6 +55,7 @@ import javax.swing.JPanel;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
+        private AbdulBlast Blast;
 
 
         // Main method definition
@@ -96,13 +96,15 @@ import javax.swing.JPanel;
             //variable and objects
             //create (construct) the objects needed for the game and load up
             Spacedude = Toolkit.getDefaultToolkit().getImage("SpaceBus.jpeg"); //load the picture
-            Blast = Toolkit.getDefaultToolkit().getImage("GDAWG.png");
+            AbdulBlast = Toolkit.getDefaultToolkit().getImage("AbdulBlast!!!.JPG");
             Ealien =  Toolkit.getDefaultToolkit().getImage("Moooon.jpeg");
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
             CSbros = new Ealien[10];
             Hship = new Spacedude(randx, randy);
+            Blast = new AbdulBlast(Hship.xpos+20,Hship.ypos+25);
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
+                CSbros[n].image = (int)(Math.random()*5)+1;
             }
 
             //Niamthemenece.dx = -Niamthemenece.dx; - use this to change the dx or dy of two objects that come from the same class
@@ -204,11 +206,17 @@ import javax.swing.JPanel;
             // When the niamastroid intercects with gdawg, GDAWG disapears
             if (Hship.isAlive == true) {
                 g.drawImage(Spacedude, Hship.xpos, Hship.ypos, Hship.width, Hship.height, null);
-                g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width, Hship.hitBox.height);
-
+                g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
+            }
+            if (Blast.isAlive == true) {
+                g.drawImage(AbdulBlast, Blast.xpos, Blast.ypos, Blast.width, Blast.height, null);
+                g.drawRect(Blast.hitBox.x, Blast.hitBox.y, Blast.hitBox.width, Blast.hitBox.height);
             }
             for(int r=0; r<CSbros.length; r=r+1) {
-                g.drawImage(Ealien,CSbros[r].xpos,CSbros[r].ypos,CSbros[r].height,CSbros[r].width,null);
+                if(CSbros[r].image == 1) {
+                    g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
+
+                }
             }
 
 

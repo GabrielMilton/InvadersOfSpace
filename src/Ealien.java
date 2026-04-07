@@ -15,6 +15,7 @@ import java.awt.*;
         public boolean isAlive;
         public Rectangle hitBox;
         public boolean iscrasinhg;
+        public int image;
 
 
 
