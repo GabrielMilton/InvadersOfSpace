@@ -101,11 +101,13 @@ import javax.swing.JPanel;
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
             CSbros = new Ealien[10];
             Hship = new Spacedude(randx, randy);
-            Blast = new AbdulBlast(Hship.xpos+20,Hship.ypos+25);
+            Blast = new AbdulBlast(Hship.xpos+20,Hship.ypos+15);
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
                 CSbros[n].image = (int)(Math.random()*5)+1;
             }
+           /*/ Blast.dx = Hship.dx;
+            Blast.dy = Hship.dy;/*/
 
             //Niamthemenece.dx = -Niamthemenece.dx; - use this to change the dx or dy of two objects that come from the same class
 
@@ -138,6 +140,7 @@ import javax.swing.JPanel;
             for(int m=0; m<CSbros.length; m=m+1){
                 CSbros[m].move();
             }
+            Blast.move();
 
         }
 
@@ -290,11 +293,13 @@ import javax.swing.JPanel;
 
         @Override
         public void mousePressed(MouseEvent e) {
+        Blast.dy = 50;
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
+        Blast.xpos = Hship.xpos+5;
+        Blast.ypos = Hship.ypos+1;
         }
 
         @Override

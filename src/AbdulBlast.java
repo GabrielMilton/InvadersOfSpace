@@ -32,7 +32,7 @@ import java.awt.*;
             xpos = pXpos;
             ypos = pYpos;
             dx = 0;
-            dy = 0;
+            dy = 30;
             width = 10;
             height = 30;
             isAlive = true;
