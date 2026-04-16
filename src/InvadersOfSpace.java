@@ -50,6 +50,7 @@ import javax.swing.JPanel;
         public Ealien[] CSbros;
         public AbdulBlast[] Blast;
         public Image BackgroundPic;
+        public int Counter;
 
         //public Niastroid[] roids;
 
@@ -104,6 +105,9 @@ import javax.swing.JPanel;
             Hship = new Spacedude(randx, randy);
             for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b] = new AbdulBlast(Hship.xpos+5,Hship.ypos+21) ;
+            }
+            for(int b = 0; b <Blast.length; b = b +1) {
+                Blast[b].isAlive = false ;
             }
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));

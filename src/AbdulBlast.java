@@ -3,6 +3,8 @@ import java.awt.*;
     /**
      * Created by chales on 11/6/2017.
      */
+
+//todo: Make a vaible counter, make each bucket of the arry to be not alive, then make them alive one at a time and then a new one comes to the ship and shoots
     public class AbdulBlast {
 
         //VARIABLE DECLARATION SECTION
