@@ -48,6 +48,7 @@ import javax.swing.JPanel;
         public Image Ealien;
         public Image AbdulBlast;
         public Ealien[] CSbros;
+        public AbdulBlast[] Blast;
         public Image BackgroundPic;
 
         //public Niastroid[] roids;
@@ -55,7 +56,6 @@ import javax.swing.JPanel;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
-        private AbdulBlast Blast;
 
 
         // Main method definition
@@ -100,19 +100,24 @@ import javax.swing.JPanel;
             Ealien =  Toolkit.getDefaultToolkit().getImage("Moooon.jpeg");
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
             CSbros = new Ealien[10];
+            Blast = new AbdulBlast[10];
             Hship = new Spacedude(randx, randy);
-            Blast = new AbdulBlast(Hship.xpos+20,Hship.ypos+15);
+            for(int b = 0; b <Blast.length; b = b +1) {
+                Blast[b] = new AbdulBlast(Hship.xpos+5,Hship.ypos+21) ;
+            }
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
                 CSbros[n].image = (int)(Math.random()*5)+1;
             }
+
            /*/ Blast.dx = Hship.dx;
             Blast.dy = Hship.dy;/*/
 
             //Niamthemenece.dx = -Niamthemenece.dx; - use this to change the dx or dy of two objects that come from the same class
 
 
-        }// InvadersOfSpace()
+
+            }// InvadersOfSpace()
 
 
 //*******************************************************************************
@@ -140,13 +145,15 @@ import javax.swing.JPanel;
             for(int m=0; m<CSbros.length; m=m+1){
                 CSbros[m].move();
             }
-            Blast.move();
+            for(int o = 0; o <Blast.length; o = o +1) {
+                Blast[o].move();
+            }
 
         }
 
         public void crashing() {
             // check to see if my astros crash into eachother
-            for(int c=0; c<CSbros.length; c=c+1){
+            for (int c=0; c<CSbros.length; c=c+1){
                 if (CSbros[c].hitBox.intersects(Hship.hitBox)&& Hship.iscrasinhg== false){
                     System.out.println("astroid crash");
                 }
@@ -211,10 +218,10 @@ import javax.swing.JPanel;
                 g.drawImage(Spacedude, Hship.xpos, Hship.ypos, Hship.width, Hship.height, null);
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
             }
-            if (Blast.isAlive == true) {
-                g.drawImage(AbdulBlast, Blast.xpos, Blast.ypos, Blast.width, Blast.height, null);
-                g.drawRect(Blast.hitBox.x, Blast.hitBox.y, Blast.hitBox.width, Blast.hitBox.height);
-            }
+            for(int a = 0; a <Blast.length; a = a +1) {
+                    g.drawImage(AbdulBlast, Blast[a].xpos+5, Blast[a].ypos+20, Blast[a].width, Blast[a].height, null);
+                }
+
             for(int r=0; r<CSbros.length; r=r+1) {
                 if(CSbros[r].image == 1) {
                     g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
@@ -293,13 +300,23 @@ import javax.swing.JPanel;
 
         @Override
         public void mousePressed(MouseEvent e) {
-        Blast.dy = 50;
+            for(int v = 0; v <Blast.length; v = v +1) {
+                Blast[v].dy = -50;
+
+            }
+            for(int n=0; n<Blast.length; n=n+1) {
+                if(Blast[n].ypos>Hship.ypos){
+                    Blast[n].ypos = Hship.ypos+21;
+                }
+            }
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-        Blast.xpos = Hship.xpos+5;
-        Blast.ypos = Hship.ypos+1;
+            for(int v = 0; v <Blast.length; v = v +1) {
+                Blast[v].xpos = Hship.xpos+5;
+                Blast[v].ypos = Hship.ypos+1;
+            }
         }
 
         @Override
