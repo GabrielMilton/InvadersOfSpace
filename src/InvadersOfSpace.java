@@ -49,8 +49,12 @@ import javax.swing.JPanel;
         public Image AbdulBlast;
         public Ealien[] CSbros;
         public AbdulBlast[] Blast;
-        public Image BackgroundPic;
         public int Counter;
+        public Image CSbro1;
+        public Image CSbro2;
+        public Image CSbro3;
+        public Image BackgroundPic;
+
 
         //public Niastroid[] roids;
 
@@ -99,16 +103,18 @@ import javax.swing.JPanel;
             Spacedude = Toolkit.getDefaultToolkit().getImage("SpaceBus.jpeg"); //load the picture
             AbdulBlast = Toolkit.getDefaultToolkit().getImage("AbdulBlast!!!.JPG");
             Ealien =  Toolkit.getDefaultToolkit().getImage("Moooon.jpeg");
+            CSbro1 = Toolkit.getDefaultToolkit().getImage("NattyNiam.png");
+            CSbro2 = Toolkit.getDefaultToolkit().getImage("RobustRen.png");
+            CSbro3 = Toolkit.getDefaultToolkit().getImage("TryannicalToby.png");
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
             CSbros = new Ealien[10];
             Blast = new AbdulBlast[10];
             Hship = new Spacedude(randx, randy);
             for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b] = new AbdulBlast(Hship.xpos+5,Hship.ypos+21) ;
-            }
-            for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b].isAlive = false ;
             }
+
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
                 CSbros[n].image = (int)(Math.random()*5)+1;
@@ -223,12 +229,26 @@ import javax.swing.JPanel;
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
             }
             for(int a = 0; a <Blast.length; a = a +1) {
-                    g.drawImage(AbdulBlast, Blast[a].xpos+5, Blast[a].ypos+20, Blast[a].width, Blast[a].height, null);
+                if(Blast[a].isAlive == true) {
+                    g.drawImage(AbdulBlast, Blast[a].xpos + 5, Blast[a].ypos + 20, Blast[a].width, Blast[a].height, null);
+                }
                 }
 
             for(int r=0; r<CSbros.length; r=r+1) {
                 if(CSbros[r].image == 1) {
                     g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
+
+                }
+                if(CSbros[r].image == 2) {
+                    g.drawImage(CSbro1, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
+
+                }
+                if(CSbros[r].image == 3) {
+                    g.drawImage(CSbro2, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
+
+                }
+                if(CSbros[r].image == 4) {
+                    g.drawImage(CSbro3, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
             }
@@ -253,24 +273,24 @@ import javax.swing.JPanel;
             // up arrow is 38
             if (e.getKeyCode()== 38){
                 System.out.println("pressed up arrow");
-                Hship.dy = 5;
+                Hship.dy = 10;
                 Hship.dy = -Math.abs(Hship.dy);
             }
 
             if (e.getKeyCode()== 40){
                 System.out.println("pressed down arrow");
-                Hship.dy = 5;
+                Hship.dy = 10;
                 Hship.dy = Math.abs(Hship.dy);
             }
             if (e.getKeyCode()== 39){
                 System.out.println("pressed right arrow");
-                Hship.dx = 5;
+                Hship.dx = 10;
                 Hship.dx = Math.abs(Hship.dx);
 
             }
             if (e.getKeyCode()== 37){
                 System.out.println("pressed left arrow");
-                Hship.dx = 5;
+                Hship.dx = 10;
                 Hship.dx = -Math.abs(Hship.dx);
             }
         }
@@ -304,10 +324,16 @@ import javax.swing.JPanel;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            for(int v = 0; v <Blast.length; v = v +1) {
+            Blast[0].dy = -50;
+            Blast[0].isAlive = true;
+           /*/ for(int u=0; u<10; u=u + 1){
+             for(int v = 0; v <Blast.length; v = v +1 ) {
+
+                Blast[v].isAlive = true;
                 Blast[v].dy = -50;
 
             }
+            }/*/
             for(int n=0; n<Blast.length; n=n+1) {
                 if(Blast[n].ypos>Hship.ypos){
                     Blast[n].ypos = Hship.ypos+21;
