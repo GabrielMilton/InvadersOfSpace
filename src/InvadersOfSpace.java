@@ -58,6 +58,7 @@ import javax.swing.JPanel;
 
 
         //public Niastroid[] roids;
+        //
 
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
