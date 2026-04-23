@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -55,6 +56,7 @@ import javax.swing.JPanel;
         public Image CSbro3;
         public Image CSbro4;
         public Image BackgroundPic;
+
 
 
         //public Niastroid[] roids;
@@ -346,8 +348,11 @@ import javax.swing.JPanel;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            Blast[0].dy = -50;
-            Blast[0].isAlive = true;
+            Blast[Counter].xpos = Hship.xpos;
+            Blast[Counter].ypos = Hship.ypos;
+            Blast[Counter].dy = -50;
+            Blast[Counter].isAlive = true;
+            Counter = Counter + 1;
            /*/ for(int u=0; u<10; u=u + 1){
              for(int v = 0; v <Blast.length; v = v +1 ) {
 
@@ -356,22 +361,15 @@ import javax.swing.JPanel;
 
             }
             }/*/
-            for(int n=0; n<Blast.length; n=n+1) {
-                if(Blast[n].ypos>Hship.ypos){
-                    Blast[n].ypos = Hship.ypos+21;
-                }
-            }
+
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             System.out.println("blast");
-            Blast[Counter].isAlive = true;
-            Blast[Counter].dy = 10;
-            Counter = Counter + 1;
-            Blast[Counter].isAlive = true;
-            Blast[Counter].dy = 5;
-            Counter = Counter + 1;
+            //Blast[Counter].isAlive = true;
+            //Counter = Counter + 1;
+
         }
 
         @Override
