@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -125,9 +124,7 @@ import javax.swing.JPanel;
                 CSbros[n].image = (int)(Math.random()*5)+1;
             }
 
-            if(Counter > 10){
-                Counter = 0;
-            }
+
 
            /*/ Blast.dx = Hship.dx;
             Blast.dy = Hship.dy;/*/
@@ -182,6 +179,7 @@ import javax.swing.JPanel;
                 if (Blast[c].hitBox.intersects(CSbros[c].hitBox)){
                     System.out.println("Blast! crash");
                     Blast[c].isAlive = false;
+                    CSbros[c].isAlive = false;
                 }
             }
 
@@ -248,33 +246,34 @@ import javax.swing.JPanel;
             }
             for(int a = 0; a <Blast.length; a = a +1) {
                 //if(Blast[a].isAlive == true) {
-                System.out.println(Blast[a].xpos+5);
                     g.drawImage(AbdulBlast, Blast[a].xpos + 5, Blast[a].ypos + 20, Blast[a].width, Blast[a].height, null);
               //  }
                 }
 
             for(int r=0; r<CSbros.length; r=r+1) {
-                if(CSbros[r].image == 1) {
+                if(CSbros[r].image == 1 && CSbros[r].isAlive == true) {
                     g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
-                if(CSbros[r].image == 2) {
+                if(CSbros[r].image == 2 && CSbros[r].isAlive == true) {
                     g.drawImage(CSbro1, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
-                if(CSbros[r].image == 3) {
+                if(CSbros[r].image == 3 && CSbros[r].isAlive == true) {
                     g.drawImage(CSbro2, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
-                if(CSbros[r].image == 4) {
+                if(CSbros[r].image == 4 && CSbros[r].isAlive == true) {
                     g.drawImage(CSbro3, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
-                if(CSbros[r].image == 5) {
+                if(CSbros[r].image == 5 && CSbros[r].isAlive == true) {
                     g.drawImage(CSbro4, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
 
                 }
-
+                g.setColor(Color.YELLOW);
+                g.setFont(new Font("TimesNewRoman",Font.BOLD,40));
+                g.drawString("3 lives!!!",20,30);
             }
 
 
@@ -295,6 +294,7 @@ import javax.swing.JPanel;
         public void keyPressed(KeyEvent e) {
             System.out.println("key typed " + e.getKeyCode());
             // up arrow is 38
+
             if (e.getKeyCode()== 38){
                 System.out.println("pressed up arrow");
                 Hship.dy = 10;
@@ -339,6 +339,20 @@ import javax.swing.JPanel;
                 System.out.println("not pressed up arrow");
                 Hship.dx = 0;
             }
+            // When space bar is pressed one blast lunches
+            //This counter vairble keeps track of the blast and when they should spawn
+            if (e.getKeyCode() == 32) {
+                System.out.println("space bar");
+                if(Counter >= 10){
+                    Counter = 0;
+                }
+                System.out.println(Counter);
+                Blast[Counter].xpos = Hship.xpos;
+                Blast[Counter].ypos = Hship.ypos;
+                Blast[Counter].dy = -50;
+                Blast[Counter].isAlive = true;
+                Counter = Counter + 1;
+            }
         }
 
         @Override
@@ -348,11 +362,7 @@ import javax.swing.JPanel;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            Blast[Counter].xpos = Hship.xpos;
-            Blast[Counter].ypos = Hship.ypos;
-            Blast[Counter].dy = -50;
-            Blast[Counter].isAlive = true;
-            Counter = Counter + 1;
+
            /*/ for(int u=0; u<10; u=u + 1){
              for(int v = 0; v <Blast.length; v = v +1 ) {
 
