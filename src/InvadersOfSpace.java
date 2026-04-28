@@ -124,8 +124,6 @@ import javax.swing.JPanel;
                 CSbros[n].image = (int)(Math.random()*5)+1;
             }
 
-
-
            /*/ Blast.dx = Hship.dx;
             Blast.dy = Hship.dy;/*/
 
@@ -175,16 +173,33 @@ import javax.swing.JPanel;
                     System.out.println("astroid crash");
                 }
             }
-            for (int c=0; c<Blast.length; c=c+1){
-                if (Blast[c].hitBox.intersects(CSbros[c].hitBox)){
+            for(int l=0; l<Blast.length; l++ )
+            for (int c=0; c<CSbros.length; c=c+1){
+                if (Blast[l].hitBox.intersects(CSbros[c].hitBox)){
                     System.out.println("Blast! crash");
-                    Blast[c].isAlive = false;
-                    CSbros[c].isAlive = false;
+                    Blast[l].isAlive = false;
+                    CSbros[c].HP = CSbros[c].HP - 50;
+
+                }
+            }
+            for (int e=0; e<CSbros.length; e=e+1){
+                if (CSbros[e].HP == 0){
+                    CSbros[e].isAlive = false;
+                    CSbros[e].xpos = 100000;
+                }
+            }
+            for (int y = 0; y <CSbros.length; y = y +1){
+                if (CSbros[y].hitBox.intersects(Hship.hitBox)&& Hship.iscrasinhg == false){
+                    System.out.println("Health: " + CSbros[y].HP);
+                    Hship.HP = Hship.HP - 100;
+                    CSbros[y].HP = CSbros[y].HP - 50;
+                    Hship.iscrasinhg = true;
+                     System.out.println("Health: " + CSbros[y].HP);
                 }
             }
 
 
-
+//  start screen
         }
 
         //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -292,28 +307,23 @@ import javax.swing.JPanel;
 
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key typed " + e.getKeyCode());
-            // up arrow is 38
+           // System.out.println("key typed " + e.getKeyCode());
+
 
             if (e.getKeyCode()== 38){
-                System.out.println("pressed up arrow");
                 Hship.dy = 10;
                 Hship.dy = -Math.abs(Hship.dy);
             }
-
             if (e.getKeyCode()== 40){
-                System.out.println("pressed down arrow");
                 Hship.dy = 10;
                 Hship.dy = Math.abs(Hship.dy);
             }
             if (e.getKeyCode()== 39){
-                System.out.println("pressed right arrow");
                 Hship.dx = 10;
                 Hship.dx = Math.abs(Hship.dx);
 
             }
             if (e.getKeyCode()== 37){
-                System.out.println("pressed left arrow");
                 Hship.dx = 10;
                 Hship.dx = -Math.abs(Hship.dx);
             }
@@ -324,19 +334,15 @@ import javax.swing.JPanel;
         public void keyReleased(KeyEvent e) {
 
             if (e.getKeyCode() == 38) {
-                System.out.println("not pressed up arrow");
                 Hship.dy = 0;
             }
             if (e.getKeyCode() == 40) {
-                System.out.println("not pressed up arrow");
                 Hship.dy = 0;
             }
             if (e.getKeyCode() == 39);{
-                System.out.println("not pressed up arrow");
                 Hship.dx = 0;
             }
             if (e.getKeyCode() == 37) {
-                System.out.println("not pressed up arrow");
                 Hship.dx = 0;
             }
             // When space bar is pressed one blast lunches

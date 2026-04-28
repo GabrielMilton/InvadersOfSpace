@@ -16,6 +16,7 @@ import java.awt.*;
         public int height;
         public boolean isAlive;
         public Rectangle hitBox;
+        public int HP;
         public boolean iscrasinhg;
 
 
@@ -37,6 +38,7 @@ import java.awt.*;
             height = 60;
             isAlive = true;
             hitBox = new Rectangle(xpos,ypos,width,height);
+            HP = 500;
             iscrasinhg = false;
 
         } // constructor

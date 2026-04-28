@@ -15,6 +15,7 @@ import java.awt.*;
         public boolean isAlive;
         public Rectangle hitBox;
         public boolean iscrasinhg;
+        public int HP;
         public int image;
 
 
@@ -36,6 +37,7 @@ import java.awt.*;
             height = 60;
             isAlive = true;
             hitBox = new Rectangle(xpos,ypos,width,height);
+            HP = 200;
             iscrasinhg = false;
 
         } // constructor
@@ -49,10 +51,10 @@ import java.awt.*;
                 dx= -dx;
             }
             if(ypos<=0){
-                dy= -dy;
+                ypos= 699;
             }
             if(ypos>=690-height){
-                dy = -dy;
+                ypos = 1;
 
             }
 
