@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 //Graphics Libraries
 
-
+//todo: ADD DOULBLE or int called HP(charachter) then during intercsection HP is = x and when Hp<x then the charachter dies
     //*******************************************************************************
 // Class Definition Section
 // step 1: implent keylisitener
@@ -115,7 +115,7 @@ import javax.swing.JPanel;
             Blast = new AbdulBlast[10];
             Hship = new Spacedude(randx, randy);
             for(int b = 0; b <Blast.length; b = b +1) {
-                Blast[b] = new AbdulBlast(Hship.xpos+5,Hship.ypos+21) ;
+                Blast[b] = new AbdulBlast(55350,3421) ;
                 Blast[b].isAlive = false ;
             }
 
