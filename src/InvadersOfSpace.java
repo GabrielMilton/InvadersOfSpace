@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
 
 //Graphics Libraries
 
-//todo: ADD DOULBLE or int called HP(charachter) then during intercsection HP is = x and when Hp<x then the charachter dies
+//todo: ADD COMMENTS!!!
     //*******************************************************************************
 // Class Definition Section
 // step 1: implent keylisitener
@@ -50,10 +51,14 @@ import javax.swing.JPanel;
         public Ealien[] CSbros;
         public AbdulBlast[] Blast;
         public int Counter;
+        public int Points;
         public Image CSbro1;
         public Image CSbro2;
         public Image CSbro3;
         public Image CSbro4;
+        public Image Salud;
+        public Image Win;
+        public Image Lose;
         public Image BackgroundPic;
 
 
@@ -64,6 +69,7 @@ import javax.swing.JPanel;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
+        private Salud ChugChug;
 
 
         // Main method definition
@@ -110,24 +116,25 @@ import javax.swing.JPanel;
             CSbro2 = Toolkit.getDefaultToolkit().getImage("RobustRen.png");
             CSbro3 = Toolkit.getDefaultToolkit().getImage("TryannicalToby.png");
             CSbro4 = Toolkit.getDefaultToolkit().getImage("GDAWG.png");
+            Salud =  Toolkit.getDefaultToolkit().getImage("ChugJug.png");
+            Win =  Toolkit.getDefaultToolkit().getImage("Wining.gif");
+            Lose = Toolkit.getDefaultToolkit().getImage("Losing.gif");
             BackgroundPic = Toolkit.getDefaultToolkit().getImage("THEMOON.jpg");
             CSbros = new Ealien[10];
             Blast = new AbdulBlast[10];
             Hship = new Spacedude(randx, randy);
+            ChugChug = new Salud(500,400);
+            //This is where the specif place where the blast are going to spawn: on top of the Hship
             for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b] = new AbdulBlast(55350,3421) ;
-                Blast[b].isAlive = false ;
             }
-
+            //This is where the CSbros will spawn and also a random number between 1 throut 5 will be assoinged to each object, giving it a different image
             for(int n=0; n<CSbros.length; n=n+1) {
-                CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*100));
+                CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*50));
                 CSbros[n].image = (int)(Math.random()*5)+1;
             }
 
-           /*/ Blast.dx = Hship.dx;
-            Blast.dy = Hship.dy;/*/
 
-            //Niamthemenece.dx = -Niamthemenece.dx; - use this to change the dx or dy of two objects that come from the same class
 
 
 
@@ -163,6 +170,7 @@ import javax.swing.JPanel;
             for(int o = 0; o <Blast.length; o = o +1) {
                 Blast[o].move();
             }
+            ChugChug.move();
             crashing();
         }
 
@@ -177,15 +185,17 @@ import javax.swing.JPanel;
             for (int c=0; c<CSbros.length; c=c+1){
                 if (Blast[l].hitBox.intersects(CSbros[c].hitBox)){
                     System.out.println("Blast! crash");
-                    Blast[l].isAlive = false;
                     CSbros[c].HP = CSbros[c].HP - 50;
 
+
                 }
+
             }
             for (int e=0; e<CSbros.length; e=e+1){
-                if (CSbros[e].HP == 0){
+                if (CSbros[e].HP <= 0 && CSbros[e].isAlive == true){
                     CSbros[e].isAlive = false;
                     CSbros[e].xpos = 100000;
+                    Points = Points + 10;
                 }
             }
             for (int y = 0; y <CSbros.length; y = y +1){
@@ -193,8 +203,17 @@ import javax.swing.JPanel;
                     System.out.println("Health: " + CSbros[y].HP);
                     Hship.HP = Hship.HP - 100;
                     CSbros[y].HP = CSbros[y].HP - 50;
-                    Hship.iscrasinhg = true;
-                     System.out.println("Health: " + CSbros[y].HP);
+                    Hship.dx = -Hship.dx+10;
+                    Hship.dy = -Hship.dy+10;
+                   //todo: add it so that when they intercest then they bounce off eachother
+                    System.out.println("Health: " + CSbros[y].HP);
+
+
+                }
+                for(int h=0; h<CSbros.length; h=h+1){
+                    if (CSbros[h].ypos == 600){
+                        Hship.HP = Hship.HP - 2;
+                    }
                 }
             }
 
@@ -254,17 +273,52 @@ import javax.swing.JPanel;
             // Start adding things here
             g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
 
-            // When the niamastroid intercects with gdawg, GDAWG disapears
+            if(Hship.HP == 0 ) {
+                Hship.isAlive = false;
+                Hship.xpos = 102443;
+                Hship.ypos = 13155;
+                g.drawString("Game Over:( ", 290, 250);
+                for (int q = 0; q < CSbros.length; q = q + 1) {
+                    CSbros[q].isAlive = false;
+                }
+                ChugChug.isAlive = false;
+                ChugChug.xpos = 102443;
+                ChugChug.ypos = 13155;
+                g.setColor(Color.BLUE);
+                g.setFont(new Font("TimesNewRoman", Font.BOLD, 100));
+                g.drawImage(Lose,0,0,WIDTH,HEIGHT,null);
+            }
+
+                if(Points == 100){
+                    ChugChug.isAlive = false;
+                    ChugChug.xpos = 102443;
+                    ChugChug.ypos = 13155;
+                    g.drawImage(Win,0,0,WIDTH,HEIGHT,null);
+                    g.setColor(Color.CYAN);
+                    g.setFont(new Font("TimesNewRoman",Font.BOLD,100));
+                    g.drawString("You Won!!!:) ",290,250);
+                }
+
+
             if (Hship.isAlive == true) {
+                g.setColor(Color.RED);
+                g.setFont(new Font("TimesNewRoman",Font.BOLD,15));
+                g.drawString("Health: " + Hship.HP,Hship.xpos,Hship.ypos+80);
                 g.drawImage(Spacedude, Hship.xpos, Hship.ypos, Hship.width, Hship.height, null);
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
+            }
+            if(Hship.HP < 600){
+                g.drawImage(Salud,ChugChug.xpos, ChugChug.ypos, ChugChug.width, ChugChug.height,null);
+                g.drawRect(ChugChug.xpos,ChugChug.ypos,ChugChug.width, ChugChug.height);
+                g.setColor(Color.YELLOW);
+                g.setFont(new Font("TimesNewRoman",Font.BOLD,10));
+                g.drawString("CLICK ME!!!: " ,ChugChug.xpos,ChugChug.ypos+80);
             }
             for(int a = 0; a <Blast.length; a = a +1) {
                 //if(Blast[a].isAlive == true) {
                     g.drawImage(AbdulBlast, Blast[a].xpos + 5, Blast[a].ypos + 20, Blast[a].width, Blast[a].height, null);
               //  }
                 }
-
             for(int r=0; r<CSbros.length; r=r+1) {
                 if(CSbros[r].image == 1 && CSbros[r].isAlive == true) {
                     g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
@@ -284,11 +338,11 @@ import javax.swing.JPanel;
                 }
                 if(CSbros[r].image == 5 && CSbros[r].isAlive == true) {
                     g.drawImage(CSbro4, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
-
                 }
-                g.setColor(Color.YELLOW);
+
+                g.setColor(Color.GREEN);
                 g.setFont(new Font("TimesNewRoman",Font.BOLD,40));
-                g.drawString("3 lives!!!",20,30);
+                g.drawString("Points: " + Points,20,50);
             }
 
 
@@ -339,7 +393,7 @@ import javax.swing.JPanel;
             if (e.getKeyCode() == 40) {
                 Hship.dy = 0;
             }
-            if (e.getKeyCode() == 39);{
+            if (e.getKeyCode() == 39){
                 Hship.dx = 0;
             }
             if (e.getKeyCode() == 37) {
@@ -353,20 +407,32 @@ import javax.swing.JPanel;
                     Counter = 0;
                 }
                 System.out.println(Counter);
-                Blast[Counter].xpos = Hship.xpos;
+                Blast[Counter].xpos = Hship.xpos+10;
                 Blast[Counter].ypos = Hship.ypos;
                 Blast[Counter].dy = -50;
                 Blast[Counter].isAlive = true;
                 Counter = Counter + 1;
+               /*/ ArrayList<AbdulBlast> ggg = new ArrayList<>();
+                ggg.add(new AbdulBlast(463,346));/*/
             }
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
+        int mousexpos = e.getX();
+        int mouseypos = e.getY();
+
+        if(ChugChug.hitBox.contains(mousexpos,mouseypos)){
+            Hship.HP = Hship.HP + 200;
+            ChugChug.isAlive = false;
+            ChugChug.xpos = 1540000;
+            ChugChug.ypos = 1430000;
+        }
+
 
         }
 
-        @Override
+        @Override//p
         public void mousePressed(MouseEvent e) {
 
            /*/ for(int u=0; u<10; u=u + 1){
