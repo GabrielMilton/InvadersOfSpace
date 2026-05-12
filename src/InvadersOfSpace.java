@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 
 //Graphics Libraries
 
-//todo: ADD COMMENTS!!!
     //*******************************************************************************
 // Class Definition Section
 // step 1: implent keylisitener
@@ -63,9 +62,6 @@ import javax.swing.JPanel;
 
 
 
-        //public Niastroid[] roids;
-        //
-
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private Spacedude Hship;
@@ -87,11 +83,9 @@ import javax.swing.JPanel;
         public InvadersOfSpace() {
 
             setUpGraphics();
-            //random strucutre
-            //(int) (Math. Random() * range) + start(where the range starts)
-            //range is 1-10
+
             int randx = (int) (Math.random() * 10) + 1;
-            //range 1-999
+
             randx = (int) (Math.random() * 999) + 1;
 
             int randy = (int) (Math.random() * 699) + 1;
@@ -105,7 +99,6 @@ import javax.swing.JPanel;
             randty = (int) (Math.random() * 699) + 1;
 
 
-            //todo make a varible rand y that generates a random number between 1-699
 
             //variable and objects
             //create (construct) the objects needed for the game and load up
@@ -128,7 +121,7 @@ import javax.swing.JPanel;
             for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b] = new AbdulBlast(55350,3421) ;
             }
-            //This is where the CSbros will spawn and also a random number between 1 throut 5 will be assoinged to each object, giving it a different image
+            //This is where the CSbros(the asteroids) will spawn and also a random number between 1 throut 5 will be assoinged to each object, giving it a different image
             for(int n=0; n<CSbros.length; n=n+1) {
                 CSbros[n] = new Ealien((int)(Math.random()*1000),(int)(Math.random()*50));
                 CSbros[n].image = (int)(Math.random()*5)+1;
@@ -163,24 +156,23 @@ import javax.swing.JPanel;
 
         public void moveThings() {
             //calls the move( ) code in the objects
+           //This makes my Hship move
             Hship.move();
+            //This makes my CSbros move
             for(int m=0; m<CSbros.length; m=m+1){
                 CSbros[m].move();
             }
+            //This makes my CSbros move
             for(int o = 0; o <Blast.length; o = o +1) {
                 Blast[o].move();
             }
+            //This makes my ChugChug move
             ChugChug.move();
             crashing();
         }
 
         public void crashing() {
-            // check to see if my astros crash into eachother
-            for (int c=0; c<CSbros.length; c=c+1){
-                if (CSbros[c].hitBox.intersects(Hship.hitBox)&& Hship.iscrasinhg == false){
-                    System.out.println("astroid crash");
-                }
-            }
+            //checks to see if the bullet and CSbros intercects and if they do the CSbro loses 50 HP
             for(int l=0; l<Blast.length; l++ )
             for (int c=0; c<CSbros.length; c=c+1){
                 if (Blast[l].hitBox.intersects(CSbros[c].hitBox)){
@@ -191,6 +183,8 @@ import javax.swing.JPanel;
                 }
 
             }
+            //this checks if the CSbro is alive using hp and if its no then it gets telported far away
+            // You also gain 10 points
             for (int e=0; e<CSbros.length; e=e+1){
                 if (CSbros[e].HP <= 0 && CSbros[e].isAlive == true){
                     CSbros[e].isAlive = false;
@@ -198,18 +192,16 @@ import javax.swing.JPanel;
                     Points = Points + 10;
                 }
             }
+            // this checks if CS bros and the Hship intercet if they do then both of them lose health and Hship bounces off
             for (int y = 0; y <CSbros.length; y = y +1){
                 if (CSbros[y].hitBox.intersects(Hship.hitBox)&& Hship.iscrasinhg == false){
-                    System.out.println("Health: " + CSbros[y].HP);
                     Hship.HP = Hship.HP - 100;
                     CSbros[y].HP = CSbros[y].HP - 50;
                     Hship.dx = -Hship.dx+10;
                     Hship.dy = -Hship.dy+10;
-                   //todo: add it so that when they intercest then they bounce off eachother
-                    System.out.println("Health: " + CSbros[y].HP);
-
 
                 }
+                // This checks to see if the CSbros are below a certian leavl and if they are the Hsip loses health
                 for(int h=0; h<CSbros.length; h=h+1){
                     if (CSbros[h].ypos == 600){
                         Hship.HP = Hship.HP - 2;
@@ -272,8 +264,8 @@ import javax.swing.JPanel;
             g.clearRect(0, 0, WIDTH, HEIGHT);
             // Start adding things here
             g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
-
-            if(Hship.HP == 0 ) {
+            //an if stament to check if HShip is alive and if it isn't then lose screen comes up
+            if(Hship.HP <= 0 ) {
                 Hship.isAlive = false;
                 Hship.xpos = 102443;
                 Hship.ypos = 13155;
@@ -288,7 +280,7 @@ import javax.swing.JPanel;
                 g.setFont(new Font("TimesNewRoman", Font.BOLD, 100));
                 g.drawImage(Lose,0,0,WIDTH,HEIGHT,null);
             }
-
+            //If points reach 100 then a win screen comes up
                 if(Points == 100){
                     ChugChug.isAlive = false;
                     ChugChug.xpos = 102443;
@@ -299,7 +291,7 @@ import javax.swing.JPanel;
                     g.drawString("You Won!!!:) ",290,250);
                 }
 
-
+            // This draws Hship and also it's health
             if (Hship.isAlive == true) {
                 g.setColor(Color.RED);
                 g.setFont(new Font("TimesNewRoman",Font.BOLD,15));
@@ -307,6 +299,7 @@ import javax.swing.JPanel;
                 g.drawImage(Spacedude, Hship.xpos, Hship.ypos, Hship.width, Hship.height, null);
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
             }
+           // checks if Hship's HP is lower then 600 if so then ChugChug spawns
             if(Hship.HP < 600){
                 g.drawImage(Salud,ChugChug.xpos, ChugChug.ypos, ChugChug.width, ChugChug.height,null);
                 g.drawRect(ChugChug.xpos,ChugChug.ypos,ChugChug.width, ChugChug.height);
@@ -314,11 +307,13 @@ import javax.swing.JPanel;
                 g.setFont(new Font("TimesNewRoman",Font.BOLD,10));
                 g.drawString("CLICK ME!!!: " ,ChugChug.xpos,ChugChug.ypos+80);
             }
+            //this draws the blasters
             for(int a = 0; a <Blast.length; a = a +1) {
                 //if(Blast[a].isAlive == true) {
                     g.drawImage(AbdulBlast, Blast[a].xpos + 5, Blast[a].ypos + 20, Blast[a].width, Blast[a].height, null);
               //  }
                 }
+            //This draws the CSbros and depending on what image number they got they spawin with a different image
             for(int r=0; r<CSbros.length; r=r+1) {
                 if(CSbros[r].image == 1 && CSbros[r].isAlive == true) {
                     g.drawImage(Ealien, CSbros[r].xpos, CSbros[r].ypos, CSbros[r].height, CSbros[r].width, null);
@@ -361,8 +356,7 @@ import javax.swing.JPanel;
 
         @Override
         public void keyPressed(KeyEvent e) {
-           // System.out.println("key typed " + e.getKeyCode());
-
+            // all of these are the key binds to control Hship
 
             if (e.getKeyCode()== 38){
                 Hship.dy = 10;
@@ -412,13 +406,13 @@ import javax.swing.JPanel;
                 Blast[Counter].dy = -50;
                 Blast[Counter].isAlive = true;
                 Counter = Counter + 1;
-               /*/ ArrayList<AbdulBlast> ggg = new ArrayList<>();
-                ggg.add(new AbdulBlast(463,346));/*/
+
             }
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            //This checks to see if you click on the ChugChug and if so then Hship gains HP
         int mousexpos = e.getX();
         int mouseypos = e.getY();
 
@@ -448,22 +442,20 @@ import javax.swing.JPanel;
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            System.out.println("blast");
-            //Blast[Counter].isAlive = true;
-            //Counter = Counter + 1;
+
 
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            System.out.println("enterred!!");
+
 
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
         }
-        //step 3 add keylisitener method
+
     }
 
 
