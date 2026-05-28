@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -117,6 +118,13 @@ import javax.swing.JPanel;
             Blast = new AbdulBlast[10];
             Hship = new Spacedude(randx, randy);
             ChugChug = new Salud(500,400);
+
+            Scanner S = new Scanner(System.in);
+            System.out.println("What is your name?");
+            String NameH = S.nextLine();
+            System.out.println(NameH);
+            Hship.name = NameH;
+
             //This is where the specif place where the blast are going to spawn: on top of the Hship
             for(int b = 0; b <Blast.length; b = b +1) {
                 Blast[b] = new AbdulBlast(55350,3421) ;
@@ -298,8 +306,11 @@ import javax.swing.JPanel;
                 g.drawString("Health: " + Hship.HP,Hship.xpos,Hship.ypos+80);
                 g.drawImage(Spacedude, Hship.xpos, Hship.ypos, Hship.width, Hship.height, null);
                 g.drawRect(Hship.hitBox.x, Hship.hitBox.y, Hship.hitBox.width+1, Hship.hitBox.height+1);
+                g.setColor(Color.PINK);
+                g.setFont(new Font("TimesNewRoman",Font.BOLD,15));
+                g.drawString(Hship.name,Hship.xpos,Hship.ypos-1);
             }
-           // checks if Hship's HP is lower then 600 if so then ChugChug spawns
+           // checks if Hship's HP is lower than 600 if so then ChugChug spawns
             if(Hship.HP < 600){
                 g.drawImage(Salud,ChugChug.xpos, ChugChug.ypos, ChugChug.width, ChugChug.height,null);
                 g.drawRect(ChugChug.xpos,ChugChug.ypos,ChugChug.width, ChugChug.height);
